@@ -1,0 +1,37 @@
+# docker-compose.yml (MySQL versiyonu)
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: tradein_mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword # Kök kullanıcı şifresi
+      MYSQL_DATABASE: tradein_db      # Oluşturulacak veritabanı
+      MYSQL_USER: root                # Uygulamanın kullanacağı kullanıcı
+      MYSQL_PASSWORD:           # Uygulama kullanıcısının şifresi
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:7
+    container_name: tradein_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  nats:
+    image: nats:2
+    container_name: tradein_nats
+    ports:
+      - "4222:4222" # Client port
+      - "8222:8222" # HTTP management port
+
+volumes:
+  mysql_data:
+  redis_data:
