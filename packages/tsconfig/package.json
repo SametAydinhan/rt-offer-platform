@@ -1,5 +1,5 @@
 {
-  "name": "tsconfig",
+  "name": "@repo/tsconfig",
   "version": "1.0.0",
   "private": true,
   "description": "",
@@ -8,6 +8,10 @@
     "base.json",
     "nest.json"
   ],
+  "exports": {
+    "./base.json": "./base.json",
+    "./nest.json": "./nest.json"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
